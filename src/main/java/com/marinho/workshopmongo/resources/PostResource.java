@@ -1,5 +1,7 @@
 package com.marinho.workshopmongo.resources;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +17,15 @@ import com.marinho.workshopmongo.services.PostService;
 public class PostResource {
 	
 	@Autowired
-	private PostService service;	
+	private PostService service;
+	
+	@RequestMapping(method=RequestMethod.GET)
+	public ResponseEntity<List<Post>> findAll(){		  	
+		List<Post> list = service.finAll();
+		//List<UserDTO> listDto = list.stream().map(x -> new UserDTO(x)).collect(Collectors.toList());
+		return ResponseEntity.ok().body(list);
+	}
+	
 		
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public ResponseEntity<Post> findById(@PathVariable String id){

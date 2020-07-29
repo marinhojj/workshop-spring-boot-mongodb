@@ -1,5 +1,6 @@
 package com.marinho.workshopmongo.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,11 @@ import com.marinho.workshopmongo.services.exception.ObjectNotFoundException;
 public class PostService {
 	
 	@Autowired
-	private PostRepository repo;	
+	private PostRepository repo;
+	
+	public List<Post> finAll(){
+		return repo.findAll();
+	}
 	
 	public Post findById(String id) {
 		Optional<Post> obj = repo.findById(id);
